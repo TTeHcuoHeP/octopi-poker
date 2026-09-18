@@ -1,0 +1,12 @@
+node_modules/
+dist/
+.vercel/
+.env*
+!.env.example
+*.log
+*.tsbuildinfo
+moodboard/
+design-work/
+*.docx
+octopi-current-*.png
+prototype-*.png
