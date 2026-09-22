@@ -9,7 +9,7 @@ import NewsSection from './NewsSection';
 import useStudyMotion from './useStudyMotion';
 
 
-type IconName = 'home' | 'play' | 'book' | 'people' | 'help' | 'sun' | 'moon' | 'arrow' | 'menu';
+type IconName = 'home' | 'play' | 'book' | 'people' | 'help' | 'sun' | 'moon' | 'arrow' | 'menu' | 'laptop' | 'store' | 'quote' | 'news';
 function Icon({ name }: { name: IconName }) {
   const paths: Record<IconName, React.ReactNode> = {
     home: <><path d="m3 10 9-7 9 7v10H3Z"/><path d="M9 20v-7h6v7"/></>,
@@ -20,13 +20,22 @@ function Icon({ name }: { name: IconName }) {
     sun: <><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1 1m12 12 1 1M5 19l1-1M18 6l1-1"/></>,
     moon: <path d="M20 15A9 9 0 0 1 9 4a9 9 0 1 0 11 11Z"/>,
     arrow: <path d="M4 12h16m-6-6 6 6-6 6"/>,
+    laptop: <><rect x="4" y="3" width="16" height="13" rx="1"/><path d="m4 16-2 4h20l-2-4M9 20h6"/></>,
+    store: <><path d="M4 8h16l-1 13H5L4 8Z"/><path d="M8 8V6a4 4 0 0 1 8 0v2"/></>,
+    quote: <><path d="M3 4h18v13H9l-5 4v-4H3Z"/><path d="M7 8h3v4H7V8Zm7 0h3v4h-3V8Z"/></>,
+    news: <><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 7h4v5H7ZM14 7h3m-3 4h3M7 16h10"/></>,
     menu: <path d="M4 7h16M4 12h16M4 17h16"/>,
   };
   return <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">{paths[name]}</svg>;
 }
 const navigation: { id: string; label: string; icon: IconName }[] = [
-  { id: 'overview', label: 'Overview', icon: 'home' }, { id: 'learning', label: 'Learning', icon: 'book' },
-  { id: 'training', label: 'How it works', icon: 'play' }, { id: 'pros', label: 'Experts', icon: 'people' }, { id: 'faq', label: 'FAQ', icon: 'help' },
+  { id: 'learning', label: '01 · Starting point', icon: 'book' },
+  { id: 'training', label: '02 · Platform', icon: 'play' },
+  { id: 'pros', label: '03 · Experts', icon: 'people' },
+  { id: 'study-anywhere', label: '04 · Study anywhere', icon: 'laptop' },
+  { id: 'octopi-world', label: '05 · Octopi world', icon: 'store' },
+  { id: 'players', label: '06 · Players', icon: 'quote' },
+  { id: 'news', label: '07 · News', icon: 'news' },
 ];
 
 function SiteHeader({ dark, toggleTheme, onSignUp, onNotice }: { dark: boolean; toggleTheme: () => void; onSignUp: () => void; onNotice: (kind: 'signin' | 'about') => void }) {
@@ -62,12 +71,24 @@ function App() {
   const [active, setActive] = useState('overview');
   const dialog = useRef<HTMLDialogElement>(null);
   useEffect(() => {
-    const observer = new IntersectionObserver(entries => {
-      const visible = entries.filter(e => e.isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio);
-      if (visible[0]) setActive(visible[0].target.id);
-    }, { rootMargin: '-10% 0px -45% 0px', threshold: [0, .2, .5] });
-    navigation.forEach(({ id }) => { const section = document.getElementById(id); if (section) observer.observe(section); });
-    return () => observer.disconnect();
+    let frame = 0;
+    const update = () => {
+      frame = 0;
+      const marker = window.innerHeight * .3;
+      let current = '';
+      for (const { id } of navigation) {
+        const section = document.getElementById(id);
+        if (section && section.getBoundingClientRect().top <= marker) current = id;
+      }
+      const faq = document.getElementById('faq');
+      if (faq && faq.getBoundingClientRect().top <= marker) current = '';
+      setActive(current);
+    };
+    const schedule = () => { if (!frame) frame = requestAnimationFrame(update); };
+    update();
+    window.addEventListener('scroll', schedule, { passive: true });
+    window.addEventListener('resize', schedule);
+    return () => { cancelAnimationFrame(frame); window.removeEventListener('scroll', schedule); window.removeEventListener('resize', schedule); };
   }, []);
   function start(placement: string) {
     // One event per placement; a real registration destination will be configured later.
@@ -82,8 +103,12 @@ function App() {
       <section id="overview" className="hero section">
         <SiteHeader dark={dark} toggleTheme={() => setDark(!dark)} onSignUp={() => start('header')} onNotice={kind => { setNotice(kind); dialog.current?.showModal(); }}/>
         <div className="hero-grid">
-          <div className="hero-copy"><p className="eyebrow">TOURNAMENT POKER TRAINING</p><h1>POKER STUDY FOR<br/>EVERYONE,<br/>BEGINNERS TO ELITE</h1><p className="hero-tagline">Serious about poker.<br/>Start feeling at home.</p><p className="intro">Build your tournament game with practice tools, courses and guided study — wherever you are starting from.</p><div className="hero-actions"><button className="primary" onClick={() => start('hero')}>Start Training Now</button></div></div>
-          <div className="hero-visual"><figure className="shark-art"><img src={dark ? "/images/shark-evolution-black-v02.png" : "/images/shark-evolution-light-v02.png"} width="864" height="475" fetchPriority="high" alt="A simple pixel shark passes through a doorway and becomes a vivid three-dimensional blue shark."/></figure><div className="hero-experts"><p><strong>Serious tools.</strong><br/>Real poker experience.</p><div className="expert-portraits" aria-label="Poker experts">{[['phil-hellmuth','Phil','Hellmuth'],['stephen-chidwick','Stephen','Chidwick'],['thomas-boivin','Thomas','Boivin']].map(([file,first,last]) => <figure key={file}><img src={`/images/experts/${file}.webp`} alt={`${first} ${last}`} width="104" height="104"/><figcaption>{first}<br/>{last}</figcaption></figure>)}</div></div></div>
+          <div className="hero-copy"><p className="eyebrow">TOURNAMENT POKER TRAINING</p><h1>POKER STUDY<br/>FOR EVERYONE,<br/><span className="hero-beginners">BEGINNERS</span> <strong className="hero-elite">TO ELITE</strong></h1><p className="intro">Build your tournament game with practice tools, courses and guided study — wherever you are starting from.</p></div>
+          <div className="hero-visual"><figure className="shark-art"><img src={dark ? "/images/shark-evolution-black-v02.png" : "/images/shark-evolution-light-v02.png"} width="864" height="475" fetchPriority="high" alt="A simple pixel shark passes through a doorway and becomes a vivid three-dimensional blue shark."/></figure></div><div className="hero-bottom"><div className="hero-conversion"><div className="hero-trial-pill"><button className="hero-start" onClick={() => start('hero')}>Start Now<span aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 12h16M12 4l8 8-8 8"/></svg></span></button><p><span>7-day Professional trial</span><strong>No credit card required</strong></p></div><div className="hero-social-proof"><div className="hero-avatars">{['phil-hellmuth','stephen-chidwick','thomas-boivin'].map((name,index)=><img key={name} src={`/images/experts/${name}.webp`} alt={['Phil Hellmuth','Stephen Chidwick','Thomas Boivin'][index]} width="60" height="60"/>)}</div><p><strong>Serious tools.</strong><span>Real poker experience.</span></p></div></div><div className="hero-benefits" aria-label="Why study with Octopi">{[
+{image:'bet',title:<>Practice with<br/>feedback.</>,copy:<>Real poker<br/>experience.</>},
+{image:'cards',title:<>Learn from<br/>real hands.</>,copy:<>Explore how<br/>the pros play.</>},
+{image:'way',title:<>Find your<br/>next step.</>,copy:<>Courses and<br/>guided study.</>}
+].map((benefit,index)=><div className="hero-benefit" key={benefit.image}><img src={`/images/hero-benefits/${benefit.image}.webp`} alt="" width="160" height="160"/><div><h3>{benefit.title}</h3><p>{benefit.copy}</p></div>{index<2&&<svg className="benefit-divider" viewBox="0 0 16 120" aria-hidden="true"><path d="M2 2 12 60 2 118" fill="none" stroke="currentColor" strokeWidth="1.5" strokeDasharray="3 4"/></svg>}</div>)}</div></div>
         </div>
       </section>
       <section id="learning" className="section learning-section">
@@ -125,11 +150,12 @@ function App() {
         </div>
         <div className="world-tutorials"><div className="world-tutorial-heading"><h2>See how it works.<br/>Start learning.</h2><p>Explore Octopi Poker with step-by-step tutorials, trainer walkthroughs and guided study sessions on YouTube.</p></div>
           <div className="world-videos">{['Octopi Poker: Full Tutorial','Octopi Trainer: Brief Overview','12-Week Guided Study Program'].map((title,i)=><a key={title} className="world-video-link" href={["https://www.youtube.com/watch?v=fAqDbw0MqxE","https://www.youtube.com/watch?v=1K6o9ZEGcl8","https://www.youtube.com/watch?v=Xw-W1QHma20"][i]} target="_blank" rel="noopener noreferrer" aria-label={`Watch ${title} on YouTube (opens in a new tab)`}><img className="world-video-thumbnail" src={`/images/octopi-world/youtube-${i+1}.webp`} alt={title} loading="lazy"/><img className="world-video-play" src="/images/octopi-world/youtube-button.svg" alt=""/></a>)}</div>
+          <aside className="community-callout" aria-labelledby="community-title"><div><h3 id="community-title">Keep learning together</h3><p>Bring your poker questions, share hands and connect with the Octopi Poker community on Discord.</p></div><a className="primary" href="https://discord.com/invite/octopipoker" target="_blank" rel="noopener noreferrer">Join our Discord <span aria-hidden="true">↗</span></a></aside>
         </div>
       </section>
       <PlayerFeedback/>
       <NewsSection/>
-      <section id="faq" className="section tinted"><div className="section-heading"><p className="eyebrow">08 / A FEW THINGS YOU MAY BE WONDERING</p><h2>Before you <span>get started.</span></h2></div><div className="faq-list">{[['Do I need to understand solvers already?','My First Solver is designed to help less advanced players get comfortable with modern study tools. Guided Study adds regular sessions with a coach.'],['What can I use for free?','The free-account offer is being confirmed. This prototype does not activate a subscription or a trial.'],['Can I study on my phone?','This page adapts to mobile. Supported product tools and their mobile limitations still need to be confirmed.']].map(([q,a])=><details key={q}><summary>{q}<span aria-hidden="true">+</span></summary><p>{a}</p></details>)}</div></section>
+      <section id="faq" className="section tinted"><div className="section-heading"><p className="eyebrow">08 / A FEW THINGS YOU MAY BE WONDERING</p><h2>Before you <span>get started.</span></h2></div><div className="faq-list">{[['Do I need to understand solvers already?','My First Solver is designed to help less advanced players get comfortable with modern study tools. Guided Study adds regular sessions with a coach.'],['What can I use for free?','You get a 7-day free trial of the Professional plan — no credit card required. Explore the tools included in Professional, try them as part of your study routine and see how Octopi Poker fits your game before choosing a subscription.'],['Can I study on my phone?','This page adapts to mobile. Supported product tools and their mobile limitations still need to be confirmed.']].map(([q,a])=><details key={q}><summary>{q}<span aria-hidden="true">+</span></summary><p>{a}</p></details>)}</div></section>
       <SiteFooter onStart={() => start('closing')}/>
     </main>
     <ChatWidget/>
