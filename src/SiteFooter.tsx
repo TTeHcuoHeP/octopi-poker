@@ -1,0 +1,12 @@
+const socialLinks = [
+  {name:'Discord',url:'https://discord.com/invite/octopipoker',icon:<><path d="M7 7c3-1.5 7-1.5 10 0l2 10-4 2-1-2h-4l-1 2-4-2 2-10Z"/><circle cx="9" cy="12.5" r="1.2" fill="#6c5ce7"/><circle cx="15" cy="12.5" r="1.2" fill="#6c5ce7"/><path d="m8 6 1-2m7 2-1-2" fill="none" stroke="white" strokeWidth="1.5"/></>},
+  {name:'Facebook',url:'https://www.facebook.com/OctopiPoker',icon:<path d="M14 22v-9h3l.5-3H14V8c0-1 .3-2 2-2h2V3h-3c-3 0-5 2-5 5v2H7v3h3v9Z"/>},
+  {name:'Instagram',url:'https://www.instagram.com/octopipoker',icon:<><rect x="4" y="4" width="16" height="16" rx="5" fill="none" stroke="white" strokeWidth="1.8"/><circle cx="12" cy="12" r="4" fill="none" stroke="white" strokeWidth="1.8"/><circle cx="17.2" cy="6.9" r="1"/></>},
+  {name:'X',url:'https://x.com/OctopiPoker',icon:<path d="M4 4h4.5L20 20h-4.5L4 4Zm16 0L4 20" fill="none" stroke="white" strokeWidth="1.5"/>},
+  {name:'YouTube',url:'https://www.youtube.com/@OctopiPoker',icon:<><rect x="3" y="6" width="18" height="12" rx="4"/><path d="m10 9 6 3-6 3Z" fill="#6c5ce7"/></>},
+];
+export default function SiteFooter({onStart}:{onStart:()=>void}){return <footer id="start" className="section final-footer" aria-labelledby="footer-title">
+<a className="footer-logo" href="#overview" aria-label="Octopi Poker home"><img src="/images/brand-logo.svg" alt="Octopi Poker" width="140" height="48"/></a>
+<div className="footer-layout"><div className="footer-invitation"><p className="eyebrow">YOUR NEXT STEP</p><h2 id="footer-title">Bring your curiosity.<br/><span>Build your game.</span></h2><p className="footer-description">Start your tournament poker study with Octopi Poker.</p><button className="primary" onClick={onStart}>Sign Up Free</button></div>
+<div className="footer-information"><div className="footer-policies" aria-label="Legal information"><a href="https://octopipoker.ai/aup">Acceptable Use Policy</a><a href="https://octopipoker.ai/terms">Terms of Service</a><a href="https://octopipoker.ai/privacy">Privacy Policy</a><a href="https://octopipoker.ai/contact">Contact us</a></div><nav className="footer-socials" aria-label="Social media">{socialLinks.map(social=><a key={social.name} href={social.url} aria-label={social.name+' (opens in a new tab)'} target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" fill="white" aria-hidden="true">{social.icon}</svg></a>)}</nav></div></div>
+<p className="footer-copyright">2026 © Octopi Poker Studios, Inc. All rights reserved</p></footer>}
