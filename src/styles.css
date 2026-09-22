@@ -580,3 +580,20 @@ main{max-width:none}
 @media(prefers-reduced-motion:reduce){.site-header .header-pages>a::after,.site-header .header-pages>button::after{transition:none}}
 
 @media(min-width:1451px){.hero-trial-pill p,.hero-social-proof p{font-size:14px}.hero-start{font-size:16px}.hero-avatars img{width:62px;height:62px}}
+
+/* Soft hover accents for hero portraits and individual study steps. */
+.hero-avatars img{position:relative;transition:transform .3s ease;transform-origin:center}
+.hero-benefit{isolation:isolate}
+.hero-benefit::before{content:"";position:absolute;inset:-12px -4px;border-radius:24px;background:radial-gradient(ellipse at center,rgba(255,255,255,.7) 0%,rgba(255,255,255,.3) 48%,rgba(255,255,255,0) 75%);opacity:0;z-index:-1;pointer-events:none;transition:opacity .35s ease}
+.hero-benefit>img,.hero-benefit>div{transition:transform .35s cubic-bezier(.22,.61,.36,1)}
+.hero-benefit>div{transform-origin:left center}
+.app[data-theme=dark] .hero-benefit::before{background:radial-gradient(ellipse at center,rgba(255,255,255,.12),rgba(255,255,255,0) 75%)}
+@media(hover:hover) and (pointer:fine){
+ .hero-avatars img:hover{transform:scale(1.08);z-index:1}
+ .hero-benefit:hover::before{opacity:1}
+ .hero-benefit:hover>img,.hero-benefit:hover>div{transform:scale(1.035)}
+}
+@media(prefers-reduced-motion:reduce){
+ .hero-avatars img,.hero-benefit>img,.hero-benefit>div,.hero-benefit::before{transition:none}
+ .hero-avatars img:hover,.hero-benefit:hover>img,.hero-benefit:hover>div{transform:none}
+}
