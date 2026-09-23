@@ -29,13 +29,14 @@ function Icon({ name }: { name: IconName }) {
   return <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">{paths[name]}</svg>;
 }
 const navigation: { id: string; label: string; icon: IconName }[] = [
-  { id: 'learning', label: '01 · Starting point', icon: 'book' },
-  { id: 'training', label: '02 · Platform', icon: 'play' },
-  { id: 'pros', label: '03 · Experts', icon: 'people' },
-  { id: 'study-anywhere', label: '04 · Study anywhere', icon: 'laptop' },
-  { id: 'octopi-world', label: '05 · Octopi world', icon: 'store' },
-  { id: 'players', label: '06 · Players', icon: 'quote' },
-  { id: 'news', label: '07 · News', icon: 'news' },
+  { id: 'overview', label: 'Home', icon: 'home' },
+  { id: 'learning', label: 'Starting point', icon: 'book' },
+  { id: 'training', label: 'Platform', icon: 'play' },
+  { id: 'pros', label: 'Experts', icon: 'people' },
+  { id: 'study-anywhere', label: 'Study anywhere', icon: 'laptop' },
+  { id: 'octopi-world', label: 'Octopi world', icon: 'store' },
+  { id: 'players', label: 'Players', icon: 'quote' },
+  { id: 'news', label: 'News', icon: 'news' },
 ];
 
 function SiteHeader({ dark, toggleTheme, onSignUp, onNotice }: { dark: boolean; toggleTheme: () => void; onSignUp: () => void; onNotice: (kind: 'signin' | 'about') => void }) {
@@ -98,13 +99,13 @@ function App() {
   }
   return <div className="app" data-theme={dark ? 'dark' : 'light'}>
     <a className="skip" href="#main">Skip to content</a>
-    <nav aria-label="On this page" className="floating-nav"><div className="nav-links">{navigation.map(item => <a key={item.id} href={`#${item.id}`} aria-label={item.label} aria-current={active === item.id ? 'location' : undefined}><Icon name={item.icon}/><span className="nav-label">{item.label}</span></a>)}</div><div className="nav-bottom"><button aria-label={dark ? 'Switch to light theme' : 'Switch to dark theme'} onClick={() => setDark(!dark)}><Icon name={dark ? 'sun' : 'moon'}/><span className="nav-label">{dark ? 'Light theme' : 'Dark theme'}</span></button></div></nav>
+    <nav aria-label="On this page" className="floating-nav"><div className="nav-links">{navigation.map(item => <a key={item.id} href={`#${item.id}`} aria-label={item.label} aria-current={active === item.id ? 'location' : undefined}>{item.icon === 'home' ? <img className="sidebar-house" src="/images/sidebar/house.svg" width="22" height="22" alt=""/> : <Icon name={item.icon}/>}<span className="nav-label">{item.label}</span></a>)}</div><div className="nav-bottom"><button aria-label={dark ? 'Switch to light theme' : 'Switch to dark theme'} onClick={() => setDark(!dark)}><Icon name={dark ? 'sun' : 'moon'}/><span className="nav-label">{dark ? 'Light theme' : 'Dark theme'}</span></button></div></nav>
     <main id="main">
       <section id="overview" className="hero section">
         <SiteHeader dark={dark} toggleTheme={() => setDark(!dark)} onSignUp={() => start('header')} onNotice={kind => { setNotice(kind); dialog.current?.showModal(); }}/>
         <div className="hero-grid">
           <div className="hero-copy"><p className="eyebrow">TOURNAMENT POKER TRAINING</p><h1>POKER STUDY<br/>FOR EVERYONE,<br/><span className="hero-beginners">BEGINNERS</span> <strong className="hero-elite">TO ELITE</strong></h1><p className="intro">Build your tournament game with practice tools, courses and guided study — wherever you are starting from.</p></div>
-          <div className="hero-visual"><figure className="shark-art"><img src={dark ? "/images/shark-evolution-black-v02.png" : "/images/shark-evolution-light-v02.png"} width="864" height="475" fetchPriority="high" alt="A simple pixel shark passes through a doorway and becomes a vivid three-dimensional blue shark."/></figure></div><div className="hero-bottom"><div className="hero-conversion"><div className="hero-trial-pill"><button className="hero-start" onClick={() => start('hero')}>Start Now<span aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 12h16M12 4l8 8-8 8"/></svg></span></button><p><span>7-day Professional trial</span><strong>No credit card required</strong></p></div><div className="hero-social-proof"><div className="hero-avatars">{['phil-hellmuth','stephen-chidwick','thomas-boivin'].map((name,index)=><img key={name} src={`/images/experts/${name}.webp`} alt={['Phil Hellmuth','Stephen Chidwick','Thomas Boivin'][index]} width="60" height="60"/>)}</div><p><strong>Serious tools.</strong><span>Real poker experience.</span></p></div></div><div className="hero-benefits" aria-label="Why study with Octopi">{[
+          <div className="hero-visual" aria-hidden="true"/><div className="hero-bottom"><div className="hero-conversion"><div className="hero-trial-pill"><button className="hero-start" onClick={() => start('hero')}>Start Now<span aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 12h16M12 4l8 8-8 8"/></svg></span></button><p><span>7-day Professional trial</span><strong>No credit card required</strong></p></div><div className="hero-social-proof"><div className="hero-avatars">{['phil-hellmuth','stephen-chidwick','thomas-boivin'].map((name,index)=><img key={name} src={`/images/experts/${name}.webp`} alt={['Phil Hellmuth','Stephen Chidwick','Thomas Boivin'][index]} width="60" height="60"/>)}</div><p><strong>Serious tools.</strong><span>Real poker experience.</span></p></div></div><div className="hero-benefits" aria-label="Why study with Octopi">{[
 {image:'bet',title:<>Practice with<br/>feedback.</>,copy:<>Real poker<br/>experience.</>},
 {image:'cards',title:<>Learn from<br/>real hands.</>,copy:<>Explore how<br/>the pros play.</>},
 {image:'way',title:<>Find your<br/>next step.</>,copy:<>Courses and<br/>guided study.</>}
@@ -112,7 +113,7 @@ function App() {
         </div>
       </section>
       <section id="learning" className="section learning-section">
-        <div className="learning-heading"><div><p className="eyebrow"><span className="section-dot" aria-hidden="true"/>01 / FIND YOUR STARTING POINT</p><h2>You don’t have to<br/>figure it out alone.</h2></div><p className="learning-heading-note trial-callout"><strong>7-day Professional trial</strong><span>— no credit card required.</span></p></div>
+        <div className="learning-heading"><div><p className="eyebrow"><span className="section-dot" aria-hidden="true"/>01 / FIND YOUR STARTING POINT</p><h2>You don’t have to<br/>figure it out alone.</h2></div><p className="learning-heading-note">A complete toolkit for learning,<br/>practice and guided improvement.</p></div>
         <div className="learning-grid">{[
           {tag:'GET ORIENTED',title:<>My First<br/>Solver</>,description:<>Real tools.<br/>A clearer view of your game.<br/>Take a look inside Octopi Poker.</>,image:'book-v01.png',kind:'book'},
           {tag:'BUILD A HABIT',title:<>GTO<br/>Trainer</>,description:<>Practice tournament decisions and get instant scoring feedback.</>,image:'target-v01.png',kind:'target'},
