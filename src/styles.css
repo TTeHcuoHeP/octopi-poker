@@ -843,3 +843,9 @@ main{max-width:none}
 /* Pointer proximity drives a damped spring without changing layout. */
 .starting-orbit-icon{transform:scale(var(--dock-scale,1));transform-origin:center bottom;transition:box-shadow .3s ease}
 @media(prefers-reduced-motion:reduce){.starting-orbit-icon{transform:none;transition:none}}
+
+/* A bounded sticky layer lets platform slide over the starting point. */
+.learning-platform-stack{position:relative;display:flow-root;isolation:isolate}
+.learning-platform-stack>.starting-orbit{position:sticky;top:var(--stack-top,0px);z-index:0}
+.learning-platform-stack>.platform-section{position:relative;z-index:1;box-shadow:0 -16px 40px -24px #25282D30}
+@media(prefers-reduced-motion:reduce){.learning-platform-stack>.starting-orbit{position:relative;top:auto}}

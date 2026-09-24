@@ -8,6 +8,7 @@ import SiteFooter from './SiteFooter';
 import NewsSection from './NewsSection';
 import useStudyMotion from './useStudyMotion';
 import useLearningDock from './useLearningDock';
+import useLearningStack from './useLearningStack';
 import HeroArtwork from './HeroArtwork';
 import OctopiClub from './OctopiClub';
 
@@ -71,6 +72,7 @@ function SiteHeader({ dark, toggleTheme, onSignUp, onNotice }: { dark: boolean; 
 function App() {
   useStudyMotion();
   useLearningDock();
+  useLearningStack();
   const [dark, setDark] = useState(false);
   const [notice, setNotice] = useState<'signup' | 'signin' | 'about'>('signup');
   const [active, setActive] = useState('overview');
@@ -116,6 +118,7 @@ function App() {
 ].map(benefit=><div className="hero-benefit" key={benefit.title}><div><h3>{benefit.title}</h3><p>{benefit.copy}</p></div></div>)}</div></div>
         </div>
       </section>
+      <div className="learning-platform-stack">
       <section id="learning" className="section starting-orbit">
         <div className="starting-orbit-rings" aria-hidden="true"/>
         <header className="starting-orbit-heading">
@@ -134,6 +137,7 @@ function App() {
         <p className="starting-orbit-note">Academy courses support your study.<br/>Mentorship offers a more hands-on next step.</p>
       </section>
       <PlatformShowcase dark={dark} onStart={() => start('platform')}/>
+      </div>
       <section id="pros" className="section experts-section">
         <div className="experts-heading"><div><p className="eyebrow"><span className="section-dot" aria-hidden="true"/>03 / LEARN FROM THE GAME’S BEST</p><h2>Serious tools.<br/>Real poker experience.</h2></div><p>Browse and review real hands to add another perspective to your own study.</p></div>
         <div className="pros-grid">{[
