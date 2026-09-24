@@ -1,0 +1,3 @@
+Earth texture and topology: three-globe 2.31.0 example assets (NASA Blue Marble), downloaded from https://unpkg.com/three-globe@2.31.0/example/img/earth-blue-marble.jpg and earth-topology.png.
+Marker: user-supplied links/planet/avatar-planet.png.
+Component: Aceternity UI 3D Globe, installed via shadcn registry; adapted to local assets and project CSS.

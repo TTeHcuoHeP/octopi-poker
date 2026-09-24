@@ -8,6 +8,7 @@ import SiteFooter from './SiteFooter';
 import NewsSection from './NewsSection';
 import useStudyMotion from './useStudyMotion';
 import HeroArtwork from './HeroArtwork';
+import OctopiClub from './OctopiClub';
 
 
 type IconName = 'home' | 'play' | 'book' | 'people' | 'help' | 'sun' | 'moon' | 'arrow' | 'menu' | 'laptop' | 'store' | 'quote' | 'news';
@@ -157,6 +158,7 @@ function App() {
       </section>
       <PlayerFeedback/>
       <NewsSection/>
+      <OctopiClub onStart={() => start('club')}/>
       <section id="faq" className="section tinted"><div className="section-heading"><p className="eyebrow">08 / A FEW THINGS YOU MAY BE WONDERING</p><h2>Before you <span>get started.</span></h2></div><div className="faq-list">{[['Do I need to understand solvers already?','My First Solver is designed to help less advanced players get comfortable with modern study tools. Guided Study adds regular sessions with a coach.'],['What can I use for free?','You get a 7-day free trial of the Professional plan — no credit card required. Explore the tools included in Professional, try them as part of your study routine and see how Octopi Poker fits your game before choosing a subscription.'],['Can I study on my phone?','This page adapts to mobile. Supported product tools and their mobile limitations still need to be confirmed.']].map(([q,a])=><details key={q}><summary>{q}<span aria-hidden="true">+</span></summary><p>{a}</p></details>)}</div></section>
       <SiteFooter onStart={() => start('closing')}/>
     </main>
