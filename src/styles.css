@@ -396,7 +396,7 @@ main{max-width:none}
 /* Hide the source image edge beneath the banner's rounded clipping. */
 .section.study-anywhere{position:relative;isolation:isolate;background-image:none}
 .section.study-anywhere::before{content:"";position:absolute;inset:-4px;z-index:-1;background:#2e3238 url('/images/study-anywhere/04-section-background.jpg') center/cover no-repeat;pointer-events:none}
-@media(min-width:761px){.study-anywhere-copy{max-width:85%}.study-anywhere-visual>img{transform:scale(1.35);transform-origin:center}}
+@media(min-width:761px){.study-anywhere-copy{max-width:85%}.study-anywhere-visual>img{transform:scale(1.08);transform-origin:center}}
 @media(max-width:760px){.section.study-anywhere::before{background-position:70% bottom}}
 
 /* George demonstration messenger. */
@@ -759,3 +759,18 @@ main{max-width:none}
 .app[data-theme=dark] :is(button,[role="button"],a.primary,a.news-more,a.header-signup) :is(span,strong,em){color:inherit!important}
 
 .app .site-header .header-signup{background:#6C5CE7;color:#FFFFFF}
+
+/* Remounted tab descriptions reveal on every platform selection. */
+@keyframes platform-copy-reveal{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+@media(prefers-reduced-motion:no-preference){
+ .platform-panel:not([hidden]) .platform-description{animation:platform-copy-reveal .35s cubic-bezier(.2,.65,.3,1) both}
+}
+
+/* Section 04: static base and two independent pointer-parallax layers. */
+.section.study-anywhere{background:#25282D;--study-pointer-x:0;--study-pointer-y:0}
+.section.study-anywhere::before,.section.study-anywhere.study-motion::before{inset:-24px;background:transparent url('/images/study-anywhere/octopi_back.png') center/cover no-repeat;transform:translate3d(calc(var(--study-pointer-x)*12px),calc(var(--study-pointer-y)*8px),0);transition:transform .7s cubic-bezier(.2,.65,.3,1)}
+.study-anywhere .study-anywhere-visual{transform:translate3d(calc(var(--study-pointer-x)*22px),calc(var(--study-pointer-y)*14px),0);transition:opacity 1s ease .12s,translate 1s cubic-bezier(.2,.65,.3,1) .12s,transform .65s cubic-bezier(.2,.65,.3,1)}
+@media(max-width:760px){.section.study-anywhere::before{background-position:70% bottom}}
+@media(prefers-reduced-motion:reduce){.section.study-anywhere::before,.section.study-anywhere .study-anywhere-visual{transform:none;transition:none}}
+
+@media(max-width:760px){.study-anywhere-visual>img{transform:scale(.8);transform-origin:center}}

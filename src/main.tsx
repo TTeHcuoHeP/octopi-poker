@@ -142,7 +142,7 @@ function App() {
             <div className="study-anywhere-benefit"><img src="/images/study-anywhere/serious-tools.svg" alt="" width="40" height="40" loading="lazy"/><h3>Serious tools. A more flexible routine.</h3></div>
             <p>Review real hands, explore strategies and build your tournament game — wherever you choose to study.</p>
           </div>
-          <div className="study-anywhere-visual"><img src="/images/study-anywhere/notebook.webp" alt="Octopi Poker on a laptop, showing a tournament hand replay and player analysis." loading="lazy"/></div>
+          <div className="study-anywhere-visual"><img src="/images/study-anywhere/notebook-2.png" alt="Octopi Poker on a laptop, showing a tournament hand replay and player analysis." loading="lazy"/></div>
         </div>
       </section>
       <section id="octopi-world" className="section octopi-world" aria-labelledby="octopi-world-title">
