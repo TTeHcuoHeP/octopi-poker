@@ -286,7 +286,7 @@ main{max-width:none}
 /* Platform v02: rounded outer panel and one invariant screenshot viewport. */
 .app{--banner-radius:24px}
 .hero.section{border-radius:var(--banner-radius)}
-.section.platform-section{margin:8px;border-radius:var(--banner-radius);padding:48px calc(var(--content-right) - 8px) 56px calc(var(--content-left) - 8px);background:#f3f3f5}
+.section.platform-section{margin:8px;border-radius:var(--banner-radius);padding:48px calc(var(--content-right) - 8px) 56px calc(var(--content-left) - 8px);background:#F7F6FE}
 .app[data-theme=dark] .platform-section{background:var(--tint)}
 .platform-heading{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:var(--grid-gap);align-items:end;margin-bottom:32px}
 .platform-heading>div{grid-column:span 8;min-width:0}
@@ -357,7 +357,7 @@ main{max-width:none}
 .app[data-theme=dark] .trial-callout strong{color:#b4aaff}
 
 /* Expert portraits follow the shared twelve-column content rails. */
-.section.experts-section{background:radial-gradient(ellipse 64% 560px at 100% 12%,rgba(108,92,231,.39) 0%,rgba(108,92,231,.14) 48%,rgba(108,92,231,0) 100%),var(--surface);color:#2e3238}
+.section.experts-section{background:var(--surface);color:#2e3238}
 .experts-heading{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:24px;align-items:center;margin-bottom:40px}
 .experts-heading>div{grid-column:span 8;min-width:0}
 .experts-heading>.eyebrow{margin:0}
@@ -618,6 +618,7 @@ main{max-width:none}
 .learning-access-note,
 .platform-heading>p,
 .experts-heading>p,
+.experts-study-note,
 .study-anywhere-copy>p:not(.eyebrow),
 .study-anywhere-benefit h3,
 .world-tutorial-heading p,
@@ -774,3 +775,71 @@ main{max-width:none}
 @media(prefers-reduced-motion:reduce){.section.study-anywhere::before,.section.study-anywhere .study-anywhere-visual{transform:none;transition:none}}
 
 @media(max-width:760px){.study-anywhere-visual>img{transform:scale(.8);transform-origin:center}}
+
+/* Compact responsive typography for the hero's supporting row. */
+.hero-bottom .hero-trial-pill p,
+.hero-bottom .hero-social-proof p,
+.hero-bottom .hero-benefits-pill .hero-benefit h3,
+.hero-bottom .hero-benefits-pill .hero-benefit p{font-size:clamp(11px,.97vw,14px)}
+@media(min-width:761px) and (max-width:1200px){
+ .hero-start{font-size:13px}
+ .hero-bottom .hero-benefits-pill{height:56px}
+ .hero-benefits-pill .hero-medal{width:48px;height:48px}
+ .hero-conversion{gap:16px}
+}
+/* Keep section 04 proportionate as the viewport narrows. */
+@media(min-width:761px) and (max-width:1440px){
+ .section.study-anywhere{padding-top:56px;padding-bottom:56px}
+ .study-anywhere-grid{min-height:440px;gap:24px}
+ .study-anywhere-copy{grid-column:span 5;max-width:100%}
+ .study-anywhere-visual{grid-column:span 7}
+ .study-anywhere-copy h2{font-size:clamp(28px,2.65vw,38px);line-height:1.25}
+ .study-anywhere-copy>p:not(.eyebrow),.study-anywhere-benefit h3{font-size:clamp(14px,1.25vw,18px);line-height:1.45}
+ .study-anywhere-copy .eyebrow{font-size:10px;margin-bottom:24px}
+ .study-anywhere-intro{margin-top:24px}
+ .study-anywhere-benefit{margin-top:24px;margin-bottom:24px}
+ .study-anywhere-benefit img{width:32px;height:32px}
+}
+@media(max-width:760px){
+ .hero-bottom .hero-trial-pill p,.hero-bottom .hero-social-proof p,.hero-bottom .hero-benefits-pill .hero-benefit h3,.hero-bottom .hero-benefits-pill .hero-benefit p{font-size:12px}
+ .section.study-anywhere{padding-top:32px;padding-bottom:32px}
+ .study-anywhere-copy h2{font-size:28px;line-height:1.25}
+ .study-anywhere-copy>p:not(.eyebrow),.study-anywhere-benefit h3{font-size:16px;line-height:1.45}
+ .study-anywhere-intro,.study-anywhere-benefit{margin-top:16px}
+ .study-anywhere-benefit{margin-bottom:16px}
+ .study-anywhere-grid{row-gap:16px}
+}
+
+/* Starting point: quiet concentric lines and three lightweight study paths. */
+.section.starting-orbit{position:relative;isolation:isolate;overflow:visible;background:transparent;color:#25282D;padding-top:88px;padding-bottom:88px;text-align:center}
+.starting-orbit>.starting-orbit-rings{position:absolute;z-index:-1;inset:0 0 -200px;overflow:hidden;pointer-events:none;background:radial-gradient(ellipse at 50% 65%,#6c5ce71f,transparent 65%);}
+.starting-orbit-options::before{content:'';position:absolute;z-index:-1;pointer-events:none;width:min(1400px,calc(100vw - 32px));aspect-ratio:1;left:50%;top:50px;transform:translate(-50%,-50%);border-radius:50%;background:repeating-radial-gradient(circle,transparent 0 71px,#6c5ce712 72px 73px,transparent 74px 96px);mask-image:radial-gradient(circle,black 30%,transparent 71%)}
+.starting-orbit-heading{max-width:880px;margin:0 auto}
+.starting-orbit-heading .eyebrow{display:flex;align-items:center;justify-content:center;gap:8px;color:#6C5CE7;margin-bottom:32px}
+.starting-orbit-heading h2{font-size:clamp(36px,4.2vw,64px);line-height:1.15;letter-spacing:-.045em;color:inherit}
+.starting-orbit-heading>p:last-child{font-size:18px;line-height:1.55;margin-top:24px;color:#626570}
+.starting-orbit-options{position:relative;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:64px;max-width:1000px;margin:64px auto 0}
+.starting-orbit-option{outline:none;min-width:0}
+.starting-orbit-icon{display:grid;place-items:center;width:100px;height:100px;margin:0 auto 16px;border:1px solid #25282D;border-radius:50%;background:#25282D;color:#EEEFF1;box-shadow:0 8px 32px #6c5ce70a;transition:transform .3s ease,box-shadow .3s ease}
+.starting-orbit-icon svg{width:41.5px;height:41.5px}
+.starting-orbit-option h3{font-size:18px;line-height:1.4;font-weight:600;min-height:51px;color:inherit}
+.starting-orbit-description{font-size:14px;line-height:1.6;color:#626570;max-width:240px;margin:16px auto 0;opacity:0;transform:translateY(8px);transition:opacity .3s ease,transform .3s ease}
+.starting-orbit-option:is(.dock-active,:focus-visible) .starting-orbit-description{opacity:1;transform:none}
+.starting-orbit-option:is(.dock-active,:focus-visible) .starting-orbit-icon{box-shadow:0 0 32px #6c5ce722}
+.starting-orbit-option:focus-visible .starting-orbit-icon{outline:2px solid #6C5CE7;outline-offset:5px}
+.starting-orbit-note{font-weight:700;font-size:14px;line-height:1.6;color:#626570;margin-top:32px}
+.app[data-theme=dark] .starting-orbit{background:transparent;color:#EEEFF1}
+.app[data-theme=dark] .starting-orbit :is(.starting-orbit-description,.starting-orbit-note,.starting-orbit-heading>p:last-child){color:#bfc1ca}
+.app[data-theme=dark] .starting-orbit-icon{background:#EEEFF1;color:#6C5CE7;border-color:#EEEFF1}
+@media(max-width:760px){.section.starting-orbit{padding-top:56px;padding-bottom:56px}.starting-orbit-options{gap:24px;margin-top:40px;grid-template-columns:1fr}.starting-orbit-option h3{min-height:0}.starting-orbit-description{opacity:1;transform:none;margin-top:8px}.starting-orbit-heading>p:last-child{font-size:16px}.starting-orbit-note{margin-top:40px}}
+@media(hover:none){.starting-orbit-description{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){.starting-orbit-icon,.starting-orbit-description{transition:none}}
+
+/* The next panel sits above the extended decorative glow. */
+.starting-orbit + .platform-section{position:relative;z-index:1}
+
+@media(max-width:760px){.starting-orbit-options::before{top:calc((100% - 48px)/3 + 74px)}}
+
+/* Pointer proximity drives a damped spring without changing layout. */
+.starting-orbit-icon{transform:scale(var(--dock-scale,1));transform-origin:center bottom;transition:box-shadow .3s ease}
+@media(prefers-reduced-motion:reduce){.starting-orbit-icon{transform:none;transition:none}}

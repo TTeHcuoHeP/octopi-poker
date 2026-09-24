@@ -7,6 +7,7 @@ import PlayerFeedback from './PlayerFeedback';
 import SiteFooter from './SiteFooter';
 import NewsSection from './NewsSection';
 import useStudyMotion from './useStudyMotion';
+import useLearningDock from './useLearningDock';
 import HeroArtwork from './HeroArtwork';
 import OctopiClub from './OctopiClub';
 
@@ -69,6 +70,7 @@ function SiteHeader({ dark, toggleTheme, onSignUp, onNotice }: { dark: boolean; 
 
 function App() {
   useStudyMotion();
+  useLearningDock();
   const [dark, setDark] = useState(false);
   const [notice, setNotice] = useState<'signup' | 'signin' | 'about'>('signup');
   const [active, setActive] = useState('overview');
@@ -114,14 +116,22 @@ function App() {
 ].map(benefit=><div className="hero-benefit" key={benefit.title}><div><h3>{benefit.title}</h3><p>{benefit.copy}</p></div></div>)}</div></div>
         </div>
       </section>
-      <section id="learning" className="section learning-section">
-        <div className="learning-heading"><div><p className="eyebrow"><span className="section-dot" aria-hidden="true"/>01 / FIND YOUR STARTING POINT</p><h2>You don’t have to<br/>figure it out alone.</h2></div><p className="learning-heading-note">A complete toolkit for learning,<br/>practice and guided improvement.</p></div>
-        <div className="learning-grid">{[
-          {tag:'GET ORIENTED',title:<>My First<br/>Solver</>,description:<>Real tools.<br/>A clearer view of your game.<br/>Take a look inside Octopi Poker.</>,image:'book-v01.png',kind:'book'},
-          {tag:'BUILD A HABIT',title:<>GTO<br/>Trainer</>,description:<>Practice tournament decisions and get instant scoring feedback.</>,image:'target-v01.png',kind:'target'},
-          {tag:'STUDY TOGETHER',title:<>Guided<br/>Study</>,description:<>Weekly live sessions with Matt Hunt, with drills and leaderboards.</>,image:'guided-study-v01.png',kind:'people'}
-        ].map(card => <article key={card.kind} tabIndex={0} className={`learning-card learning-card-${card.kind}`}><img className="learning-object" src={`/images/${card.image}`} alt="" loading="lazy"/><div className="learning-card-copy"><p className="eyebrow">{card.tag}</p><h3>{card.title}</h3><p>{card.description}</p></div></article>)}</div>
-        <p className="learning-access-note">Academy courses support your study.<br/>Mentorship offers a more hands-on next step.</p>
+      <section id="learning" className="section starting-orbit">
+        <div className="starting-orbit-rings" aria-hidden="true"/>
+        <header className="starting-orbit-heading">
+          <p className="eyebrow"><span className="section-dot" aria-hidden="true"/>01 / FIND YOUR STARTING POINT</p>
+          <h2>You don’t have to<br/>figure it out alone.</h2>
+          <p>A complete toolkit for learning,<br/>practice and guided improvement.</p>
+        </header>
+        <div className="starting-orbit-options">{[
+          {title:<>My First<br/>Solver</>,description:<>Real tools.<br/>A clearer view of your game.<br/>Take a look inside Octopi Poker.</>,kind:'book'},
+          {title:<>GTO Trainer</>,description:<>Practice tournament decisions and get instant scoring feedback.</>,kind:'target'},
+          {title:<>Guided Study</>,description:<>Weekly live sessions with Matt Hunt, with drills and leaderboards.</>,kind:'people'}
+        ].map(card => <article key={card.kind} tabIndex={0} className="starting-orbit-option">
+          <div className="starting-orbit-icon">{card.kind === 'target' ? <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth="1.4" aria-hidden="true"><circle cx="16" cy="16" r="11"/><circle cx="16" cy="16" r="6"/><circle cx="16" cy="16" r="1.5"/><path d="m16 16 11-11m-5 0h5v5"/></svg> : <Icon name={card.kind === 'book' ? 'book' : 'people'}/>}</div>
+          <h3>{card.title}</h3><p className="starting-orbit-description">{card.description}</p>
+        </article>)}</div>
+        <p className="starting-orbit-note">Academy courses support your study.<br/>Mentorship offers a more hands-on next step.</p>
       </section>
       <PlatformShowcase dark={dark} onStart={() => start('platform')}/>
       <section id="pros" className="section experts-section">
