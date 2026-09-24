@@ -682,3 +682,27 @@ main{max-width:none}
  .hero-benefits-pill .hero-benefit:hover>div{transform:scale(1.035)}
 }
 @media(prefers-reduced-motion:reduce){.hero-benefits-pill .hero-medal,.hero-benefits-pill .hero-benefit>div{transition:none;transform:none}}
+
+/* Registered full-canvas layers preserve the supplied hero composition. */
+.hero.section{position:relative;isolation:isolate;overflow:hidden}
+.app[data-theme=light] .hero.section{background:#f3f0ff}
+.hero-parallax{position:absolute;inset:0;z-index:-1;pointer-events:none;--pointer-x:0;--pointer-y:0}
+.hero-parallax-layer{position:absolute;inset:0;background-position:center;background-size:cover;background-repeat:no-repeat;transition:transform .65s cubic-bezier(.2,.65,.3,1)}
+.hero-parallax-main{background-image:url('/images/hero-parallax/hero_white-main-9ba44da867.jpg');transform:translate(calc(var(--pointer-x)*3px),calc(var(--pointer-y)*2px)) scale(1.012)}
+.hero-parallax-up{background-image:url('/images/hero-parallax/hero_white_left-up-a7754207cc.png');transform:translate(calc(var(--pointer-x)*12px),calc(var(--pointer-y)*8px))}
+.hero-parallax-down{background-image:url('/images/hero-parallax/hero_white_left-down-e48f2f9bb5.png');transform:translate(calc(var(--pointer-x)*20px),calc(var(--pointer-y)*13px))}
+.hero-parallax-right{background-image:url('/images/hero-parallax/hero_white_right-down-61cf4d985b.png');transform:translate(calc(var(--pointer-x)*28px),calc(var(--pointer-y)*18px))}
+@media(min-width:761px){.hero-visual{position:static}}
+@media(max-width:760px){.app[data-theme=light] .hero-visual{position:relative;background:none;isolation:isolate}.hero-parallax-layer{background-size:auto 100%;background-position:90% center}}
+@media(prefers-reduced-motion:reduce){.hero-parallax-layer{transition:none;transform:none}}
+
+/* Dark hero uses the same registered four-layer parallax. */
+.app[data-theme=dark] .hero.section{background:#090810}
+.app[data-theme=dark] .hero-parallax-main{background-image:url('/images/hero-parallax/hero_black-main-9623d0cb5a.jpg')}
+.app[data-theme=dark] .hero-parallax-up{background-image:url('/images/hero-parallax/hero_black_left-up-b308775428.png')}
+.app[data-theme=dark] .hero-parallax-down{background-image:url('/images/hero-parallax/hero_black_left-down-1bfefd1908.png')}
+.app[data-theme=dark] .hero-parallax-right{background-image:url('/images/hero-parallax/hero_black_right-down-35a9c3e566.png')}
+@media(max-width:760px){.app[data-theme=dark] .hero-visual{position:relative;background:none;isolation:isolate}}
+
+/* Anchor desktop artwork to the outer hero, not the padded content grid. */
+@media(min-width:761px){.hero>.hero-grid{position:static;z-index:auto}}

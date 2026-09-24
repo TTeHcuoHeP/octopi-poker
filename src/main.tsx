@@ -7,6 +7,7 @@ import PlayerFeedback from './PlayerFeedback';
 import SiteFooter from './SiteFooter';
 import NewsSection from './NewsSection';
 import useStudyMotion from './useStudyMotion';
+import HeroArtwork from './HeroArtwork';
 
 
 type IconName = 'home' | 'play' | 'book' | 'people' | 'help' | 'sun' | 'moon' | 'arrow' | 'menu' | 'laptop' | 'store' | 'quote' | 'news';
@@ -105,7 +106,7 @@ function App() {
         <SiteHeader dark={dark} toggleTheme={() => setDark(!dark)} onSignUp={() => start('header')} onNotice={kind => { setNotice(kind); dialog.current?.showModal(); }}/>
         <div className="hero-grid">
           <div className="hero-copy"><p className="eyebrow">TOURNAMENT POKER TRAINING</p><h1>POKER STUDY<br/>FOR EVERYONE,<br/><span className="hero-beginners">BEGINNERS</span> <strong className="hero-elite">TO ELITE</strong></h1><p className="intro">Build your tournament game with practice tools, courses and guided study — wherever you are starting from.</p></div>
-          <div className="hero-visual" aria-hidden="true"/><div className="hero-bottom"><div className="hero-conversion"><div className="hero-trial-pill"><button className="hero-start" onClick={() => start('hero')}>Start Now<span aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 12h16M12 4l8 8-8 8"/></svg></span></button><p><span>7-day Professional trial</span><strong>No credit card required</strong></p></div><div className="hero-social-proof"><div className="hero-avatars">{['phil-hellmuth','stephen-chidwick','thomas-boivin'].map((name,index)=><img key={name} src={`/images/experts/${name}.webp`} alt={['Phil Hellmuth','Stephen Chidwick','Thomas Boivin'][index]} width="60" height="60"/>)}</div><p><strong>Serious tools.</strong><strong>Study how pros play.</strong></p></div></div><div className="hero-benefits hero-benefits-pill" aria-label="Why study with Octopi"><img className="hero-medal" src="/images/hero-benefits/medal.png" alt="" width="54" height="54"/>{[
+          <div className="hero-visual" aria-hidden="true"><HeroArtwork/></div><div className="hero-bottom"><div className="hero-conversion"><div className="hero-trial-pill"><button className="hero-start" onClick={() => start('hero')}>Start Now<span aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 12h16M12 4l8 8-8 8"/></svg></span></button><p><span>7-day Professional trial</span><strong>No credit card required</strong></p></div><div className="hero-social-proof"><div className="hero-avatars">{['phil-hellmuth','stephen-chidwick','thomas-boivin'].map((name,index)=><img key={name} src={`/images/experts/${name}.webp`} alt={['Phil Hellmuth','Stephen Chidwick','Thomas Boivin'][index]} width="60" height="60"/>)}</div><p><strong>Serious tools.</strong><strong>Study how pros play.</strong></p></div></div><div className="hero-benefits hero-benefits-pill" aria-label="Why study with Octopi"><img className="hero-medal" src="/images/hero-benefits/medal.png" alt="" width="54" height="54"/>{[
 {title:'Practice with feedback.',copy:'Real poker experience.'},
 {title:'Learn from real hands.',copy:'Explore how the pros play.'},
 {title:'Find your next step.',copy:'Courses and guided study.'}
