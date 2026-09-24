@@ -752,3 +752,10 @@ main{max-width:none}
 
 /* Enlarge the globe downward while preserving its visible top edge. */
 .club-globe-area .club-globe{transform:scale(1.3);transform-origin:50% 10%}
+
+/* All button labels stay white in dark mode, including link-based CTAs. */
+.app[data-theme=dark] :is(button,[role="button"],a.primary,a.news-more,a.header-signup),
+.app[data-theme=dark] :is(button,[role="button"],a.primary,a.news-more,a.header-signup):is(:hover,:focus-visible,:active){color:#FFFFFF!important}
+.app[data-theme=dark] :is(button,[role="button"],a.primary,a.news-more,a.header-signup) :is(span,strong,em){color:inherit!important}
+
+.app .site-header .header-signup{background:#6C5CE7;color:#FFFFFF}
