@@ -847,5 +847,5 @@ main{max-width:none}
 /* A bounded sticky layer lets platform slide over the starting point. */
 .learning-platform-stack{position:relative;display:flow-root;isolation:isolate}
 .learning-platform-stack>.starting-orbit{position:sticky;top:var(--stack-top,0px);z-index:0}
-.learning-platform-stack>.platform-section{position:relative;z-index:1;box-shadow:0 -16px 40px -24px #25282D30}
-@media(prefers-reduced-motion:reduce){.learning-platform-stack>.starting-orbit{position:relative;top:auto}}
+.learning-platform-stack>.platform-section{position:relative;z-index:1;margin-top:clamp(240px,30vh,320px);box-shadow:0 -16px 40px -24px #25282D30}
+@media(prefers-reduced-motion:reduce){.learning-platform-stack>.starting-orbit{position:relative;top:auto}.learning-platform-stack>.platform-section{margin-top:8px}}
