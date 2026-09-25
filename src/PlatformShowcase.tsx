@@ -23,7 +23,7 @@ export default function PlatformShowcase({ dark, onStart }: { dark: boolean; onS
   const [zoom, setZoom] = useState(0);
   const dialog = useRef<HTMLDialogElement>(null);
   const tool = tools[active];
-  const source = (file: string) => `/images/platform/${file}-${dark ? 'dark' : 'light'}.webp`;
+  const source = (file: string) => `/images/platform/${file}-${dark ? 'dark' : 'light'}.webp${file === 'postflop' && !dark ? '?v=7780b608ce' : ''}`;
   return <section id="training" className="section tinted platform-section">
     <div className="platform-heading"><div><p className="eyebrow"><span className="section-dot" aria-hidden="true"/>02 / INSIDE THE PLATFORM</p><h2>Meet your next study session.</h2></div><p>Real tools. A clearer view of your game.<br/>Take a look inside Octopi Poker.</p></div>
     <div className="platform-tabs" role="tablist" aria-label="Explore platform tools">{tools.map((item, index) => <button key={item.id} type="button" role="tab" id={`tab-${item.id}`} aria-controls={`panel-${item.id}`} aria-selected={active === index} tabIndex={active === index ? 0 : -1} onClick={() => setActive(index)} onKeyDown={event => {
