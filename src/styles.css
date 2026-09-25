@@ -128,7 +128,7 @@ main{max-width:none}
 .theme-toggle{display:none;align-items:center;justify-content:center;width:40px}
 .site-header .sign-in{padding-inline:16px!important}
 .header-signup{min-height:48px;padding:8px 24px;border-radius:8px;justify-content:center;font-size:14px}
-.header-menu-toggle,.mobile-page-links{display:none}
+.header-menu-toggle{display:none}
 .floating-nav{border-radius:24px}
 @media(min-width:761px) and (max-width:1100px){.site-navigation{gap:24px}.header-pages{gap:16px}.header-utilities{gap:8px}.site-header{gap:24px}.hero-logo{width:128px;height:auto}}
 @media(max-width:760px){
@@ -146,9 +146,6 @@ main{max-width:none}
  .language-dropdown .dropdown-panel{position:absolute;width:192px;left:0;right:auto}
  .theme-toggle{display:flex;justify-self:end}
  .header-signup{width:100%;padding-inline:16px}
- .mobile-page-links{display:grid;grid-template-columns:1fr 1fr;gap:8px;border-top:1px solid var(--line);padding-top:16px}
- .mobile-page-links p{grid-column:1/-1;font-size:12px;color:var(--muted);margin-bottom:8px}
- .mobile-page-links a{padding-block:8px;min-height:40px}
  .floating-nav{display:none!important}
 }
 /* Two compact secondary destinations, aligned to the existing 12-column grid. */
@@ -660,7 +657,7 @@ main{max-width:none}
 .hero-benefits-pill .hero-benefit:hover>div{transform:none}
 @media(min-width:1151px) and (max-width:1450px){.hero-conversion{flex-wrap:wrap;gap:12px}.hero-bottom .hero-benefits-pill .hero-benefit{padding-inline:8px}.hero-bottom .hero-benefits-pill .hero-benefit h3,.hero-bottom .hero-benefits-pill .hero-benefit p{font-size:11px}}
 @media(max-width:1150px){.hero-bottom{grid-template-columns:1fr}.hero-bottom .hero-benefits-pill .hero-benefit h3,.hero-bottom .hero-benefits-pill .hero-benefit p{font-size:14px}}
-@media(max-width:760px){.hero-bottom .hero-benefits-pill{height:auto;min-height:62px;border-radius:24px;flex-wrap:wrap;padding:16px;gap:12px}.hero-benefits-pill .hero-medal{margin:0}.hero-bottom .hero-benefits-pill .hero-benefit{flex:1 1 calc(100% - 80px);padding:0}.hero-benefits-pill .hero-benefit+.hero-benefit{flex-basis:100%;border-left:0;border-top:1px dotted rgba(37,40,45,.18);padding-top:12px}}
+@media(max-width:760px){.hero-bottom .hero-benefits-pill{height:auto;min-height:62px;border-radius:24px;flex-wrap:wrap;padding:16px;gap:12px}.hero-benefits-pill .hero-medal{display:none}.hero-bottom .hero-benefits-pill .hero-benefit{flex:1 1 100%;padding:0}.hero-benefits-pill .hero-benefit+.hero-benefit{flex-basis:100%;border-left:0;border-top:1px dotted rgba(37,40,45,.18);padding-top:12px}}
 
 /* Keep the benefits capsule compact instead of distributing spare width. */
 @media(min-width:761px){
@@ -849,3 +846,61 @@ main{max-width:none}
 .learning-platform-stack>.starting-orbit{position:sticky;top:var(--stack-top,0px);z-index:0}
 .learning-platform-stack>.platform-section{position:relative;z-index:1;margin-top:clamp(240px,30vh,320px);box-shadow:0 -16px 40px -24px #25282D30}
 @media(prefers-reduced-motion:reduce){.learning-platform-stack>.starting-orbit{position:relative;top:auto}.learning-platform-stack>.platform-section{margin-top:8px}}
+
+/* Mobile hero composition: centered copy and a dedicated transparent artwork. */
+.mobile-header-language{display:none}
+@media(max-width:760px){
+ .app[data-theme=light] .hero.section{background:#F0EFFE}
+ .app[data-theme=dark] .hero.section{background:#212429}
+ .hero .site-header{display:grid;grid-template-columns:1fr auto 1fr;gap:8px;margin-bottom:40px;align-items:center}
+ .site-header>a{grid-column:2;grid-row:1;justify-self:center}
+ .site-header .hero-logo{width:clamp(100px,27vw,160px);height:auto}
+ .site-header>.mobile-header-language{display:block;grid-column:1;grid-row:1;justify-self:start}
+ .site-header>.header-menu-toggle{grid-column:3;grid-row:1;justify-self:end;color:#6C5CE7}
+ .header-utilities>.language-dropdown{display:none}
+ .mobile-header-language summary{font-size:12px;gap:4px;white-space:nowrap}
+ .mobile-header-language .language-flag{order:-1;width:24px;height:auto}
+ .site-header .mobile-header-language .dropdown-panel{position:absolute;top:100%;left:0;width:180px;background:var(--surface);z-index:5}
+ .hero>.hero-grid{display:flex;flex-direction:column;gap:16px;margin:0;text-align:center}
+ .hero-copy{width:100%;text-align:center}
+ .hero-copy .eyebrow{font-size:clamp(10px,2.6vw,14px);margin-bottom:16px}
+ .hero .hero-copy h1{font-size:clamp(24px,6.25vw,44px);width:auto;max-width:100%;line-height:1.3}
+ .hero .hero-copy .intro{font-size:clamp(14px,3.15vw,18px);max-width:520px;margin:16px auto 0;line-height:1.5}
+ .app .hero .hero-visual{position:relative;isolation:isolate;width:100%;height:auto;min-height:0;aspect-ratio:2144/1864;max-width:480px;align-self:center;background:none;margin:-8px 0}
+ .hero-visual .hero-parallax{z-index:0;background:url('/images/hero-mobile/hero_white_mobile.png') center/contain no-repeat}
+ .app[data-theme=dark] .hero-visual .hero-parallax{background-image:url('/images/hero-mobile/hero_black_mobile.png')}
+ .hero-visual .hero-parallax-layer{display:none}
+ .hero .hero-bottom{width:100%;display:flex;flex-direction:column;gap:24px;margin:0;padding:0}
+ .hero-bottom .hero-conversion{display:flex;flex-direction:column;align-items:center;gap:24px;width:100%}
+ .hero-bottom .hero-trial-pill{max-width:100%;gap:8px;padding:4px 12px 4px 4px;text-align:left}
+ .hero-bottom .hero-trial-pill p{font-size:clamp(10px,2.8vw,14px)}
+ .hero-trial-pill .hero-start{min-height:44px;font-size:12px;gap:8px;padding-left:12px}
+ .hero-start>span{width:30px;height:30px}
+ .hero-bottom .hero-social-proof{flex-direction:column-reverse;gap:12px;text-align:center}
+ .hero-bottom .hero-social-proof p{font-size:14px}
+ .hero-social-proof .hero-avatars img{width:56px;height:56px}
+ .hero-bottom .hero-benefits-pill{width:100%;max-width:100%;text-align:center;align-items:center;gap:12px;padding:16px;border-radius:20px}
+ .hero-bottom .hero-benefits-pill .hero-benefit{justify-content:center;width:100%}
+ .hero-bottom .hero-benefits-pill .hero-benefit>div{width:100%;text-align:center}
+ .hero-bottom .hero-benefits-pill .hero-benefit h3,.hero-bottom .hero-benefits-pill .hero-benefit p{font-size:14px}
+}
+
+/* Mobile dropdown: theme control above a single authentication row. */
+@media(max-width:760px){
+ .site-navigation .header-pages{padding-right:56px}
+ .site-navigation .header-utilities{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);width:100%;gap:16px}
+ .site-navigation .theme-toggle{position:absolute;top:16px;right:16px;display:flex;width:40px;height:40px;min-height:40px;padding:0;border:1px solid var(--line);border-radius:50%;background:#F0EFFE;color:#6C5CE7}
+ .app[data-theme=dark] .site-navigation .theme-toggle{background:#25282D;border-color:#535A66}
+ .site-navigation .sign-in{grid-column:1;grid-row:1;min-height:48px;width:100%;text-align:center}
+ .site-navigation .header-signup{grid-column:2;grid-row:1;min-width:0;width:100%}
+}
+
+/* Mobile section 04: centered content directly on the section background. */
+@media(max-width:760px){
+ .study-anywhere-copy{padding:0;background:transparent;border-radius:0;text-align:center;width:100%;max-width:100%}
+ .study-anywhere-copy .eyebrow{justify-content:center}
+ .study-anywhere-copy h2 br:last-of-type{display:none}
+ .study-anywhere-benefit img{margin:0 auto 8px}
+ .study-anywhere-visual{justify-self:center;width:100%}
+ .study-anywhere-visual>img{margin-inline:auto;transform-origin:center}
+}

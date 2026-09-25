@@ -56,6 +56,7 @@ function SiteHeader({ dark, toggleTheme, onSignUp, onNotice }: { dark: boolean; 
   const destination = (path: string) => { const url = new URL(path, 'https://octopipoker.ai'); new URLSearchParams(window.location.search).forEach((value, key) => { if (!url.searchParams.has(key)) url.searchParams.set(key, value); }); return url.toString(); };
   return <header ref={header} className="site-header">
     <a href="#overview" aria-label="Octopi Poker home"><img className="hero-logo" src="/images/brand-logo.svg" alt="Octopi Poker" width="140" height="48"/></a>
+    <details className="header-dropdown language-dropdown mobile-header-language"><summary aria-label="Language: English">ENG <span aria-hidden="true">⌄</span><svg className="language-flag" viewBox="0 0 32 22" aria-hidden="true"><rect width="32" height="22" fill="#fff"/>{[0,4,8,12,16,20].map(y => <rect key={y} y={y} width="32" height="2" fill="#ed4562"/>)}<rect width="14" height="12" fill="#3c4788"/>{[2,5,8,11].map(x => [2,5,8,11].map(y => <circle key={`${x}-${y}`} cx={x} cy={y} r=".65" fill="white"/>))}</svg></summary><div className="dropdown-panel"><span className="current-language" lang="en">English <span aria-hidden="true">✓</span></span><p>More languages coming soon.</p></div></details>
     <button ref={toggle} className="header-menu-toggle" aria-label={open ? 'Close navigation' : 'Open navigation'} aria-expanded={open} aria-controls="site-navigation" onClick={() => setOpen(!open)}><Icon name="menu"/></button>
     <nav id="site-navigation" aria-label="Site navigation" className={open ? 'site-navigation is-open' : 'site-navigation'}>
       <div className="header-pages"><a href={destination('/vault')}>Vault</a><a href={destination('/academy')}>Academy</a><a href={destination('/pricing')}>Pricing</a><a href={destination('https://shop.octopipoker.ai/')}>Shop</a><button onClick={() => { setOpen(false); onNotice('about'); }}>About</button></div>
@@ -64,7 +65,6 @@ function SiteHeader({ dark, toggleTheme, onSignUp, onNotice }: { dark: boolean; 
         <button className="theme-toggle" aria-label={dark ? 'Switch to light theme' : 'Switch to dark theme'} onClick={toggleTheme}><Icon name={dark ? 'sun' : 'moon'}/></button>
         <button className="sign-in" onClick={() => { setOpen(false); onNotice('signin'); }}>Sign In</button><button className="primary header-signup" onClick={() => { setOpen(false); onSignUp(); }}>Sign Up</button>
       </div>
-      <div className="mobile-page-links"><p>On this page</p>{navigation.map(item => <a key={item.id} href={`#${item.id}`} onClick={() => setOpen(false)}>{item.label}</a>)}</div>
     </nav>
   </header>;
 }
@@ -151,7 +151,7 @@ function App() {
         <div className="study-anywhere-grid">
           <div className="study-anywhere-copy">
             <p className="eyebrow"><span className="section-dot" aria-hidden="true"/>04 / STUDY ON YOUR OWN TERMS</p>
-            <h2 id="study-anywhere-title">Serious tools.<br/>Real poker<br/>experience.</h2>
+            <h2 id="study-anywhere-title">Serious tools.<br/>Real poker<br/> experience.</h2>
             <p className="study-anywhere-intro">Make room for poker study in your everyday life.</p>
             <div className="study-anywhere-benefit"><img src="/images/study-anywhere/serious-tools.svg" alt="" width="40" height="40" loading="lazy"/><h3>Serious tools. A more flexible routine.</h3></div>
             <p>Review real hands, explore strategies and build your tournament game — wherever you choose to study.</p>
