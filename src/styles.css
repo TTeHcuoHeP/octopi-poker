@@ -904,3 +904,24 @@ main{max-width:none}
  .study-anywhere-visual{justify-self:center;width:100%}
  .study-anywhere-visual>img{margin-inline:auto;transform-origin:center}
 }
+
+/* Match the testimonial navigation on mobile. */
+@media(max-width:760px){
+ .news-prev,.news-next{width:32px;height:32px;padding:0;border:1px solid #7869e9;border-radius:50%;background:var(--surface);color:#7869e9;font-size:28px;line-height:1}
+ .news-prev{left:calc(50% - 40px)}
+ .news-next{right:calc(50% - 40px)}
+}
+
+/* Center the mobile footer in both themes. */
+@media(max-width:760px){
+ .section.final-footer{text-align:center}
+ .final-footer .footer-logo{display:table;margin-inline:auto}
+ .footer-layout{justify-items:center}
+ .footer-invitation,.footer-information{width:100%;text-align:center}
+ .footer-description{max-width:440px;margin-inline:auto}
+ .app .final-footer .footer-invitation h2 span{color:inherit}
+ .footer-invitation .primary{display:flex;margin-inline:auto}
+ .final-footer .footer-policies{align-items:center}
+ .final-footer .footer-socials{justify-content:center}
+ .footer-copyright{text-align:center}
+}
